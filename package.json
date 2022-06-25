@@ -1,0 +1,28 @@
+{
+  "name": "profile-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackAtkerson/atkerson-challenge-10.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JackAtkerson/atkerson-challenge-10/issues"
+  },
+  "homepage": "https://github.com/JackAtkerson/atkerson-challenge-10#readme",
+  "devDependencies": {
+    "jest": "^28.1.1"
+  },
+  "dependencies": {
+    "inquirer": "^9.0.0"
+  }
+}
