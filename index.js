@@ -1,9 +1,9 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+const manager = require('Manager');
 const Engineer = require('Engineer');
 const Intern = require('Intern');
-const Manager = require('Manager');
 const generateHTML = require('./src/generateHTML');
 
 const employeeArray = [];
