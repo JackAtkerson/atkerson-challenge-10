@@ -4,6 +4,9 @@ const inquirer = require('inquirer');
 const Engineer = require('Engineer');
 const Intern = require('Intern');
 const Manager = require('Manager');
+const generateHTML = require('./src/generateHTML');
+
+const employeeArray = [];
 
 const addEmployee = () => {
     console.log(`
@@ -39,7 +42,7 @@ const addEmployee = () => {
                 if (idInput) {
                     return true;
                 } else {
-                    console.log("Please enter a valid ID number");
+                    console.log("Please enter a valid ID number!");
                     return false;
                 }
             }
@@ -52,7 +55,7 @@ const addEmployee = () => {
                 if (emailInput) {
                     return true;
                 } else {
-                    console.log("Please enter a valid email address");
+                    console.log("Please enter a valid email address!");
                     return false;
                 }
             }
@@ -108,6 +111,49 @@ const addEmployee = () => {
     ])
     
     .then(employeeData => {
-        
+        let { name, id, email, role, github, school, confirmAddEmployee } = employeeData;
+        let employee;
+
+        if (role === 'Manager') {
+            employee = new Manager (name, id, email, officeNumber);
+            console.log(employee);
+        } else if (role === 'Engineer') {
+            employee = new Engineer (name, id, email, github);
+            console.log(employee);
+        } else if (role === 'Intern') {
+            employee = new Intern (name, id, email, school);
+            console.log(employee);
+        }
+
+        employeeArray.push(employee);
+
+        if (confirmAddEmployee) {
+            return addEmployee(employeeArray);
+        } else {
+            return employeeArray;
+        }
+
     })
 };
+
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Employee profiles successfully generated! Check out the index.html file in the dist folder to see the finished product.");
+        }
+    })
+};
+
+addEmployee()
+    .then (employeeArray => {
+        return generateHTML(employeeArray);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML)
+    })
+    .catch(err => {
+        console.log(err);
+    });
